@@ -2,10 +2,12 @@
 <?php $version = "1.8"; ?>
 <?php header("Content-Type: text/event-stream"); ?>
 <?php header("Cache-Control: no-cache"); ?>
+<?php require "base64url.php"; ?>
 <?php
 if (isset($_GET['doc'])){
-  $doc = rawurlencode($_GET['doc']);
-  $file = "docs/$doc";
+  //$doc = rawurlencode($_GET['doc']);
+  $doc = $_GET['doc'];
+  $file = "docs/" . base64urlencode($doc);
   $pos = intval($_GET['pos']);
   if (function_exists("inotify_init")){
     $fd = inotify_init();

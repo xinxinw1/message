@@ -2,8 +2,18 @@
 
 var version = "1.8";
 
+/* require webtoolkit.base64.js */
+
 function $(a){
   return document.getElementById(a);
+}
+
+function base64urlencode(a){
+  return Base64.encode(a).replace("+", "-").replace("/", "_");
+}
+
+function base64urldecode(a){
+  return Base64.encode(a).replace("-", "+").replace("_", "/");
 }
 
 var origTitle = document.title;
@@ -47,7 +57,7 @@ function runOnload(){
       clearText();
     }
     $("source").onclick = function (){
-      window.open('docs/' + encodeURIComponent(doc), '_blank', 'height=550, width=900, top=150, left=200, menubar=no, resizable=yes, scrollbars=yes, status=no, toolbar=no');
+      window.open('docs/' + base64urlencode(doc), '_blank', 'height=550, width=900, top=150, left=200, menubar=no, resizable=yes, scrollbars=yes, status=no, toolbar=no');
     }
   }
 }
