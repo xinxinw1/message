@@ -1,0 +1,9 @@
+<?php /****** Simple Instant Message 1.0 ******/ ?>
+<?php
+if (isset($_REQUEST['doc'])){
+  $file = "../docs/" . $_REQUEST['doc'];
+  if (file_exists($file))unlink($file);
+  $fp = fopen($file, "a");
+  fclose($fp);
+}
+?>

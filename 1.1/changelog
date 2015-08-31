@@ -1,0 +1,10 @@
+Version 1.1 - May 11, 2013 15:41
+
+- condensed addtext.php and cleartext.php into message.php
+- security: prevented access to files outside of ../docs
+- allow text to have special chars (means filenames are all escaped)
+- removed send button
+- added new routes for when inotify and/or server-sent events don't work
+- moved ajax to a new function
+- added no-cache headers to all files because IE caches and makes a mess
+- made #bot height 100px

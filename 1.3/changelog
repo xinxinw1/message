@@ -1,0 +1,21 @@
+Version 1.3 - May 20, 2013 17:17
+
+- headers now on seperate lines
+- new abstraction: file syntax: message|time|name|text\n or notice|time|text\n
+- different name highlighting
+- time stamps
+- "Eric is online\offline" notices
+- font to Ariel
+- file read and write locks to prevent missed or duplicate messages
+- cleartext -> clearText
+- no need to rawurldecode() $_GET or $_POST input; is already decoded by the time it gets to PHP
+- removed pre tag
+- html stuff all at top in js
+- removed parameters that are global variables
+- added word wrap
+- clear text button now doesn't have set width
+- added usleep while !file_exists
+- changed if (filesize($file) == 0 && $pos != 0) to if (filesize($file) < $pos)
+- checknew: each event has two \n at end of each event instead of three
+- checknew.php now takes a pos argument
+- added third color

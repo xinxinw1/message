@@ -1,0 +1,13 @@
+Version 1.4 - May 22, 2013 22:20
+
+- onclick, onkeydown, onbeforeunload are only set if name and doc are entered
+- if cancel is clicked, the dialogs stop
+- page refresh still keeps dialogs
+- if you go to http://musiclifephilosophy.com/codes/message/1.4/message.php, you will be notified to go to http://musiclifephilosophy.com/codes/message/latest/message.php
+- new error message type
+- prompt dialogs have default "" instead of on IE "undefined"
+- if type set but not known, message.php continues opening as usual
+- file not opened if either name or doc isn't set
+- data defaults to "" and pos to 0
+- new $updated variable appended to query string of js and css; forces browser to request new version if updated
+- when cancel is pressed Chrome returns "null"

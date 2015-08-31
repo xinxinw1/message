@@ -1,0 +1,11 @@
+<?php /****** Simple Instant Message 1.0 ******/ ?>
+<?php
+if (isset($_REQUEST['doc']) && isset($_REQUEST['text'])){
+  $file = "../docs/" . $_REQUEST['doc'];
+  $text = $_REQUEST['text'] . "\n";
+  echo $text;
+  $fp = fopen($file, "a");
+  fwrite($fp, $text);
+  fclose($fp);
+}
+?>
