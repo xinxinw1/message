@@ -79,13 +79,14 @@ if (isset($_REQUEST['type'])){
     $name = $_GET['name'];
     sendNotice($doc, "$name is online.");
     while (true){
-      echo getTime() . "\n";
+      echo ".";
+      //echo getTime() . "\n";
       ob_flush();
       flush();
       if (connection_status() != CONNECTION_NORMAL){
         break;
       }
-      usleep(10000);
+      usleep(70000);
     }
     die(sendNotice($doc, "$name is offline."));
   }
