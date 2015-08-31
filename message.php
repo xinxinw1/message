@@ -1,8 +1,9 @@
 <?php header("Cache-Control: no-cache"); ?>
+<?php $version = "1.8"; ?>
 <?php
 if (isset($_REQUEST['type'])){
   function addData($doc, $data){
-    $file = "../docs/$doc";
+    $file = "docs/$doc";
     while (!file_exists($file))usleep(10000);
     $fp = fopen($file, "a");
     flock($fp, LOCK_EX);
@@ -36,7 +37,7 @@ if (isset($_REQUEST['type'])){
   
   function clearText($doc){
     $doc = rawurlencode($doc);
-    $file = "../docs/$doc";
+    $file = "docs/$doc";
     if (file_exists($file)){
       $fp = fopen($file, "a");
       flock($fp, LOCK_EX);
@@ -94,7 +95,8 @@ $name = isset($_GET['name'])?rawurlencode($_GET['name']):"";
 $doc = isset($_GET['doc'])?rawurlencode($_GET['doc']):"";
 $data = ""; $pos = 0;
 if (isset($_GET['name']) && isset($_GET['doc'])){
-  $file = "../docs/$doc";
+  $file = "docs/$doc";
+  if (!is_dir("docs"))mkdir("docs");
   if (!file_exists($file)){
     $fp = fopen($file, "a");
     fclose($fp);
@@ -107,15 +109,14 @@ if (isset($_GET['name']) && isset($_GET['doc'])){
   fclose($fp);
 }
 ?>
-<?php $updated = "Jul.13.2013.16.02"; ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title>Simple Instant Message 1.7</title>
+  <title>Simple Instant Message <?php echo $version ?></title>
   <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="message.css?<?php echo $updated ?>">
-  <script type="text/javascript" src="message.js?<?php echo $updated ?>"></script>
+  <link rel="stylesheet" type="text/css" href="message.css">
+  <script type="text/javascript" src="message.js"></script>
   <script type="text/javascript">
   var name = decodeURIComponent("<?php echo $name ?>");
   var doc = decodeURIComponent("<?php echo $doc ?>");

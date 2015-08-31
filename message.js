@@ -1,4 +1,6 @@
-/****** Simple Instant Message 1.7 ******/
+/****** Simple Instant Message ******/
+
+var version = "1.8";
 
 function $(a){
   return document.getElementById(a);
@@ -29,7 +31,7 @@ function runOnload(){
       isBlurred = true;
     };
     checkNew();
-    var str = location.pathname;
+    /*var str = location.pathname;
     if (str.indexOf("latest") == -1 && str.indexOf("devel") == -1){
       var time = getDateTime();
       var msg = "Notice: You are not on the latest version of Simple Instant Message.";
@@ -38,20 +40,20 @@ function runOnload(){
       if (str.indexOf("test") != -1)msg += "http://musiclifephilosophy.com/test/message/latest/message.php";
       else msg += "http://musiclifephilosophy.com/codes/message/latest/message.php";
       receiveData("error|" + encodeURIComponent(time) + "|" + encodeURIComponent(msg) + "\n");
-    }
+    }*/
     checkConnection();
     $("text").onkeydown = checkEnter;
     $("clear").onclick = function (){
       clearText();
     }
     $("source").onclick = function (){
-      window.open('/codes/message/docs/' + encodeURIComponent(doc), '_blank', 'height=550, width=900, top=150, left=200, menubar=no, resizable=yes, scrollbars=yes, status=no, toolbar=no');
+      window.open('docs/' + encodeURIComponent(doc), '_blank', 'height=550, width=900, top=150, left=200, menubar=no, resizable=yes, scrollbars=yes, status=no, toolbar=no');
     }
   }
 }
 
 Date.prototype.getMonthName = function (){
-  var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "Spetember", "October", "November", "December"];
+  var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   return monthNames[this.getMonth()];
 }
 
