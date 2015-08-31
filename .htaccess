@@ -1,3 +1,0 @@
-RewriteEngine on
-RewriteRule ^latest/(.*)$ 1.7/$1
-RewriteRule ^latest2/(.*)$ /test/message/latest/$1 [R=301]

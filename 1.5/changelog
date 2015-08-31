@@ -1,6 +1,0 @@
-Version 1.5 - May 25, 2013 12:29
-
-- seperated sendMessage, sendNotice, clearText into functions
-- enable users to change name or doc
-- change title to "(!) " + title when new event occurs and window is out of focus
-- more consistent implementation of "Eric is offline" on server side
