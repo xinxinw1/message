@@ -16,7 +16,7 @@ function runOnload(){
     if (!isEmpty(name)){
       if (isEmpty(doc))doc = prompt("Enter document name: ", "");
       if (!isEmpty(doc)){
-        location.assign("message.php?name=" + encodeURIComponent(name) + "&doc=" + encodeURIComponent(doc));
+        location.assign("?name=" + encodeURIComponent(name) + "&doc=" + encodeURIComponent(doc));
       }
     }
   } else {
@@ -93,14 +93,14 @@ function isEmpty(text){
 function newName(){
   var newName = prompt("Enter your name: ", name);
   if (!isEmpty(newName)){
-    location.assign("message.php?name=" + encodeURIComponent(newName) + "&doc=" + encodeURIComponent(doc));
+    location.assign("?name=" + encodeURIComponent(newName) + "&doc=" + encodeURIComponent(doc));
   }
 }
 
 function newDoc(){
   var newDoc = prompt("Enter document name: ", doc);
   if (!isEmpty(newDoc)){
-    location.assign("message.php?name=" + encodeURIComponent(name) + "&doc=" + encodeURIComponent(newDoc));
+    location.assign("?name=" + encodeURIComponent(name) + "&doc=" + encodeURIComponent(newDoc));
   }
 }
 
@@ -170,7 +170,7 @@ function checkNewOnce(){
 }
 
 function clearText(){
-  var file = "message.php";
+  var file = "index.php";
   var params = "type=clearText&doc=" + encodeURIComponent(doc);
   params += "&name=" + encodeURIComponent(name);
   var func = function (resp){}
@@ -180,7 +180,7 @@ function clearText(){
 }
 
 function sendMessage(text){
-  var file = "message.php";
+  var file = "index.php";
   var params = "type=sendMessage&doc=" + encodeURIComponent(doc);
   params += "&name=" + encodeURIComponent(name);
   params += "&text=" + encodeURIComponent(text);
@@ -193,7 +193,7 @@ function sendMessage(text){
 }
 
 function sendNotice(text, async){
-  var file = "message.php";
+  var file = "index.php";
   var params = "type=sendNotice&doc=" + encodeURIComponent(doc);
   params += "&text=" + encodeURIComponent(text);
   var func = function (resp){};
@@ -204,7 +204,7 @@ function sendNotice(text, async){
 }
 
 function checkConnection(){
-  var file = "message.php";
+  var file = "index.php";
   var params = "type=checkConnection&doc=" + encodeURIComponent(doc);
   params += "&name=" + encodeURIComponent(name);
   var func = function (resp){};

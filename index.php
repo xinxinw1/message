@@ -126,7 +126,7 @@ if (isset($_GET['name']) && isset($_GET['doc'])){
 </head>
 
 <body>
-  <div id="top"><a href="message.php" onclick="newName(); return false;">Name: <span id="name"></span></a> | <a href="message.php" onclick="newDoc(); return false;">Doc: <span id="doc"></span></a></div>
+  <div id="top"><a href="index.php" onclick="newName(); return false;">Name: <span id="name"></span></a> | <a href="index.php" onclick="newDoc(); return false;">Doc: <span id="doc"></span></a></div>
   <div id="buttons">
     <input type="button" value="View Source" id="source">
     <input type="button" value="Clear Text" id="clear">
