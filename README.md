@@ -4,7 +4,7 @@ An online instant messaging program. You can run this on your server and use it 
 
 A demo is available at http://musiclifephilosophy.com/codes/message/
 
-Keep in mind that the server admin (ie. me) can read everything you write there!
+Keep in mind that the server admin (ie. me) can read everything you write!
 
 ## Installation
 
