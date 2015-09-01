@@ -1,5 +1,5 @@
 <?php /****** Simple Instant Message ******/ ?>
-<?php $version = "2.0"; ?>
+<?php $version = "2.1"; ?>
 <?php header("Content-Type: text/event-stream"); ?>
 <?php header("Cache-Control: no-cache"); ?>
 <?php require "base64url.php"; ?>
@@ -12,7 +12,7 @@ if (isset($_GET['doc'])){
   if (function_exists("inotify_init")){
     $fd = inotify_init();
     while (true){
-      while (!file_exists($file))usleep(500000);
+      while (!file_exists($file))usleep(200000);
       $fp = fopen($file, "r");
       flock($fp, LOCK_SH);
       
@@ -76,7 +76,7 @@ if (isset($_GET['doc'])){
     }
   } else {
     while (true){
-      while (!file_exists($file))usleep(500000);
+      while (!file_exists($file))usleep(200000);
       
       clearstatcache();
       if (filesize($file) > $pos){
@@ -103,7 +103,7 @@ if (isset($_GET['doc'])){
         flush();
         $pos = 0;
       }
-      usleep(500000);
+      usleep(200000);
     }
   }
 }

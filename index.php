@@ -1,5 +1,5 @@
 <?php header("Cache-Control: no-cache"); ?>
-<?php $version = "2.0"; ?>
+<?php $version = "2.1"; ?>
 <?php require "base64url.php"; ?>
 <?php
 if (isset($_REQUEST['type'])){
@@ -78,6 +78,7 @@ if (isset($_REQUEST['type'])){
     set_time_limit(0);
     $doc = $_GET['doc'];
     $name = $_GET['name'];
+    usleep(200000);
     sendNotice($doc, "$name is online.");
     while (true){
       echo ".";

@@ -1,6 +1,6 @@
 /****** Simple Instant Message ******/
 
-var version = "2.0";
+var version = "2.1";
 
 /* require webtoolkit.base64.js */
 
