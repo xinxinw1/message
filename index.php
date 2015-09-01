@@ -1,5 +1,5 @@
 <?php header("Cache-Control: no-cache"); ?>
-<?php $version = "1.8"; ?>
+<?php $version = "2.0"; ?>
 <?php require "base64url.php"; ?>
 <?php
 if (isset($_REQUEST['type'])){
@@ -87,7 +87,7 @@ if (isset($_REQUEST['type'])){
       if (connection_status() != CONNECTION_NORMAL){
         break;
       }
-      usleep(70000);
+      usleep(100000); // usleep(1000) = sleep for 1 millisecond
     }
     die(sendNotice($doc, "$name is offline."));
   }
