@@ -1,5 +1,5 @@
 <?php /****** Simple Instant Message ******/ ?>
-<?php $version = "2.1"; ?>
+<?php $version = "2.2"; ?>
 <?php header("Content-Type: text/event-stream"); ?>
 <?php header("Cache-Control: no-cache"); ?>
 <?php require "base64url.php"; ?>
