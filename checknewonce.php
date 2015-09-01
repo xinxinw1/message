@@ -1,14 +1,17 @@
-<?php /****** Simple Instant Message 1.7 ******/ ?>
+<?php /****** Simple Instant Message ******/ ?>
+<?php $version = "2.0"; ?>
 <?php header("Cache-Control: no-cache"); ?>
+<?php require "base64url.php"; ?>
 <?php
 if (isset($_GET['doc'])){
-  $doc = rawurlencode($_GET['doc']);
-  $file = "../docs/$doc";
+  //$doc = rawurlencode($_GET['doc']);
+  $doc = $_GET['doc'];
+  $file = "docs/" . base64urlencode($doc);
   $pos = intval($_GET['pos']);
   if (function_exists("inotify_init")){
     $fd = inotify_init();
     
-    while (!file_exists($file))usleep(10000);
+    while (!file_exists($file))usleep(500000);
     $fp = fopen($file, "r");
     flock($fp, LOCK_SH);
     
@@ -53,7 +56,7 @@ if (isset($_GET['doc'])){
     }
   } else {
     while (true){
-      while (!file_exists($file))usleep(10000);
+      while (!file_exists($file))usleep(500000);
       
       clearstatcache();
       if (filesize($file) > $pos){
@@ -71,7 +74,7 @@ if (isset($_GET['doc'])){
       } else if (filesize($file) < $pos){
         die("\n0");
       }
-      usleep(10000);
+      usleep(500000);
     }
   }
 }

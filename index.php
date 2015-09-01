@@ -1,8 +1,10 @@
 <?php header("Cache-Control: no-cache"); ?>
+<?php $version = "2.0"; ?>
+<?php require "base64url.php"; ?>
 <?php
 if (isset($_REQUEST['type'])){
   function addData($doc, $data){
-    $file = "../docs/$doc";
+    $file = "docs/" . base64urlencode($doc);
     while (!file_exists($file))usleep(10000);
     $fp = fopen($file, "a");
     flock($fp, LOCK_EX);
@@ -18,7 +20,7 @@ if (isset($_REQUEST['type'])){
   }
   
   function sendMessage($doc, $name, $text){
-    $doc = rawurlencode($doc);
+    //$doc = rawurlencode($doc);
     $name = rawurlencode($name);
     $text = rawurlencode($text);
     $time = rawurlencode(getTime());
@@ -27,7 +29,7 @@ if (isset($_REQUEST['type'])){
   }
   
   function sendNotice($doc, $text){
-    $doc = rawurlencode($doc);
+    //$doc = rawurlencode($doc);
     $text = rawurlencode($text);
     $time = rawurlencode(getTime());
     $data = "notice|$time|$text\n";
@@ -35,8 +37,8 @@ if (isset($_REQUEST['type'])){
   }
   
   function clearText($doc){
-    $doc = rawurlencode($doc);
-    $file = "../docs/$doc";
+    //$doc = rawurlencode($doc);
+    $file = "docs/" . base64urlencode($doc);
     if (file_exists($file)){
       $fp = fopen($file, "a");
       flock($fp, LOCK_EX);
@@ -78,13 +80,14 @@ if (isset($_REQUEST['type'])){
     $name = $_GET['name'];
     sendNotice($doc, "$name is online.");
     while (true){
-      echo getTime() . "\n";
+      echo ".";
+      //echo getTime() . "\n";
       ob_flush();
       flush();
       if (connection_status() != CONNECTION_NORMAL){
         break;
       }
-      usleep(10000);
+      usleep(100000); // usleep(1000) = sleep for 1 millisecond
     }
     die(sendNotice($doc, "$name is offline."));
   }
@@ -94,7 +97,8 @@ $name = isset($_GET['name'])?rawurlencode($_GET['name']):"";
 $doc = isset($_GET['doc'])?rawurlencode($_GET['doc']):"";
 $data = ""; $pos = 0;
 if (isset($_GET['name']) && isset($_GET['doc'])){
-  $file = "../docs/$doc";
+  $file = "docs/" . base64urlencode(rawurldecode($doc));
+  if (!is_dir("docs"))mkdir("docs");
   if (!file_exists($file)){
     $fp = fopen($file, "a");
     fclose($fp);
@@ -107,16 +111,16 @@ if (isset($_GET['name']) && isset($_GET['doc'])){
   fclose($fp);
 }
 ?>
-<?php $updated = "Jul.13.2013.16.02"; ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title>Simple Instant Message 1.7</title>
+  <title>Simple Instant Message <?php echo $version ?></title>
   <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="message.css?<?php echo $updated ?>">
-  <script type="text/javascript" src="message.js?<?php echo $updated ?>"></script>
-  <script type="text/javascript">
+  <link rel="stylesheet" href="message.css">
+  <script src="webtoolkit.base64.js"></script>
+  <script src="message.js"></script>
+  <script>
   var name = decodeURIComponent("<?php echo $name ?>");
   var doc = decodeURIComponent("<?php echo $doc ?>");
   var data = decodeURIComponent("<?php echo $data ?>");
@@ -125,7 +129,7 @@ if (isset($_GET['name']) && isset($_GET['doc'])){
 </head>
 
 <body>
-  <div id="top"><a href="message.php" onclick="newName(); return false;">Name: <span id="name"></span></a> | <a href="message.php" onclick="newDoc(); return false;">Doc: <span id="doc"></span></a></div>
+  <div id="top"><a href="index.php" onclick="newName(); return false;">Name: <span id="name"></span></a> | <a href="index.php" onclick="newDoc(); return false;">Doc: <span id="doc"></span></a></div>
   <div id="buttons">
     <input type="button" value="View Source" id="source">
     <input type="button" value="Clear Text" id="clear">

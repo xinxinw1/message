@@ -1,7 +1,19 @@
-/****** Simple Instant Message 1.7 ******/
+/****** Simple Instant Message ******/
+
+var version = "2.0";
+
+/* require webtoolkit.base64.js */
 
 function $(a){
   return document.getElementById(a);
+}
+
+function base64urlencode(a){
+  return Base64.encode(a).replace("+", "-").replace("/", "_");
+}
+
+function base64urldecode(a){
+  return Base64.encode(a).replace("-", "+").replace("_", "/");
 }
 
 var origTitle = document.title;
@@ -14,7 +26,7 @@ function runOnload(){
     if (!isEmpty(name)){
       if (isEmpty(doc))doc = prompt("Enter document name: ", "");
       if (!isEmpty(doc)){
-        location.assign("message.php?name=" + encodeURIComponent(name) + "&doc=" + encodeURIComponent(doc));
+        location.assign("?name=" + encodeURIComponent(name) + "&doc=" + encodeURIComponent(doc));
       }
     }
   } else {
@@ -29,7 +41,7 @@ function runOnload(){
       isBlurred = true;
     };
     checkNew();
-    var str = location.pathname;
+    /*var str = location.pathname;
     if (str.indexOf("latest") == -1 && str.indexOf("devel") == -1){
       var time = getDateTime();
       var msg = "Notice: You are not on the latest version of Simple Instant Message.";
@@ -38,20 +50,20 @@ function runOnload(){
       if (str.indexOf("test") != -1)msg += "http://musiclifephilosophy.com/test/message/latest/message.php";
       else msg += "http://musiclifephilosophy.com/codes/message/latest/message.php";
       receiveData("error|" + encodeURIComponent(time) + "|" + encodeURIComponent(msg) + "\n");
-    }
+    }*/
     checkConnection();
     $("text").onkeydown = checkEnter;
     $("clear").onclick = function (){
       clearText();
     }
     $("source").onclick = function (){
-      window.open('/codes/message/docs/' + encodeURIComponent(doc), '_blank', 'height=550, width=900, top=150, left=200, menubar=no, resizable=yes, scrollbars=yes, status=no, toolbar=no');
+      window.open('docs/' + base64urlencode(doc), '_blank', 'height=550, width=900, top=150, left=200, menubar=no, resizable=yes, scrollbars=yes, status=no, toolbar=no');
     }
   }
 }
 
 Date.prototype.getMonthName = function (){
-  var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "Spetember", "October", "November", "December"];
+  var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   return monthNames[this.getMonth()];
 }
 
@@ -91,14 +103,14 @@ function isEmpty(text){
 function newName(){
   var newName = prompt("Enter your name: ", name);
   if (!isEmpty(newName)){
-    location.assign("message.php?name=" + encodeURIComponent(newName) + "&doc=" + encodeURIComponent(doc));
+    location.assign("?name=" + encodeURIComponent(newName) + "&doc=" + encodeURIComponent(doc));
   }
 }
 
 function newDoc(){
   var newDoc = prompt("Enter document name: ", doc);
   if (!isEmpty(newDoc)){
-    location.assign("message.php?name=" + encodeURIComponent(name) + "&doc=" + encodeURIComponent(newDoc));
+    location.assign("?name=" + encodeURIComponent(name) + "&doc=" + encodeURIComponent(newDoc));
   }
 }
 
@@ -168,7 +180,7 @@ function checkNewOnce(){
 }
 
 function clearText(){
-  var file = "message.php";
+  var file = "index.php";
   var params = "type=clearText&doc=" + encodeURIComponent(doc);
   params += "&name=" + encodeURIComponent(name);
   var func = function (resp){}
@@ -178,7 +190,7 @@ function clearText(){
 }
 
 function sendMessage(text){
-  var file = "message.php";
+  var file = "index.php";
   var params = "type=sendMessage&doc=" + encodeURIComponent(doc);
   params += "&name=" + encodeURIComponent(name);
   params += "&text=" + encodeURIComponent(text);
@@ -191,7 +203,7 @@ function sendMessage(text){
 }
 
 function sendNotice(text, async){
-  var file = "message.php";
+  var file = "index.php";
   var params = "type=sendNotice&doc=" + encodeURIComponent(doc);
   params += "&text=" + encodeURIComponent(text);
   var func = function (resp){};
@@ -202,7 +214,7 @@ function sendNotice(text, async){
 }
 
 function checkConnection(){
-  var file = "message.php";
+  var file = "index.php";
   var params = "type=checkConnection&doc=" + encodeURIComponent(doc);
   params += "&name=" + encodeURIComponent(name);
   var func = function (resp){};
