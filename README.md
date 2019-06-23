@@ -2,7 +2,7 @@
 
 An online instant messaging program. You can run this on your server and use it to talk to your friends!
 
-A demo is available at http://musiclifephilosophy.com/codes/message/
+A demo is available at https://xin-xin.me/php/message/
 
 Keep in mind that the server admin (ie. me) can read everything you write!
 
